@@ -336,6 +336,24 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     }
 
     /**
+     * count total data of repository
+     *
+     * @return mixed
+     */
+    public function count()
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $results = $this->model->count();
+
+        $this->resetModel();
+        $this->resetScope();
+
+        return $results;
+    }
+
+    /**
      * Alias of All method
      *
      * @param array $columns
